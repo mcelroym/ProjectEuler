@@ -1,10 +1,4 @@
 import math
-import time
-
-num = 600851475143
-max_prime_factor = 1
-
-# what is the largest prime number that evenly divides num?
 
 def is_prime(n):
     i = 2
@@ -26,23 +20,17 @@ def is_prime(n):
 
     return True
 
-n = 2
-val = num
 
-print "Running..."
-t = time.clock()
+def get_nth_prime(k):
+    count = 0
+    num_to_test = 2
 
-while n <= val:
-    if val % n == 0:
-        if is_prime(n):
-            max_prime_factor = n
+    while count < k:
+        if is_prime(num_to_test):
+            count += 1
 
-        val = val / n
+        num_to_test += 1
 
-    else:
-        n += 1
+    return num_to_test - 1
 
-print "Finished"
-print "Runtime: ", time.clock() - t
-
-print max_prime_factor
+print get_nth_prime(10001)
