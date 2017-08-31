@@ -34,3 +34,63 @@ for i in range(20):
     for j in range(20):
         grid[i][j] = number_grid[20*i + j]
 
+max_product = 0
+
+def max_horizontal(grid):
+    max_product = 0
+
+    # horizontal products
+    for i in range(len(grid)):
+        for j in range(len(grid)-3):
+            prod1 = grid[i][j] * grid[i][j + 1] * grid[i][j + 2] * grid[i][j + 3]
+
+            if prod1 > max_product:
+                max_product = prod1
+
+    return max_product
+
+def max_vertical(grid):
+    max_product = 0
+
+    # vertical products
+    for i in range(len(grid)-3):
+        for j in range(len(grid)):
+            prod1 = grid[i][j] * grid[i + 1][j] * grid[i + 2][j] * grid[i + 3][j]
+
+
+            if prod1 > max_product:
+                max_product = prod1
+
+    return max_product
+
+def max_diagonal(grid):
+    max_product = 0
+
+    for i in range(len(grid)-3):
+        for j in range(len(grid)-3):
+            prod1 = grid[i][j] * grid[i + 1][j + 1] * grid[i + 2][j + 2] * grid[i + 3][j + 3]
+            prod2 = grid[i][j + 3] * grid[i + 1][j + 2] * grid[i + 2][j + 1] * grid[i + 3][j]
+
+            if prod1 > max_product:
+                max_product = prod1
+
+            if prod2 > max_product:
+                max_product = prod2
+
+    return max_product
+
+
+sub_grid = [[0 for i in range(5)] for j in range(5)]
+for i in range(4):
+    for j in range(4):
+        sub_grid[i][j] = grid[i][j]
+
+print max_horizontal(sub_grid)
+print max_vertical(sub_grid)
+print max_diagonal(sub_grid)
+
+#print max_horizontal(grid)
+#print max_vertical(grid)
+#print max_diagonal(grid)
+
+print max(max_horizontal(grid), max_vertical(grid), max_diagonal(grid))
